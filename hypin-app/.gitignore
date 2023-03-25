@@ -1,0 +1,11 @@
+# Logs and databases #
+######################
+*.log
+
+# node #
+########
+node_modules
+
+# Env #
+#######
+.env
