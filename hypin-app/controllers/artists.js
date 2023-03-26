@@ -10,6 +10,7 @@ const fetch = require('node-fetch');
 // API call resources:
 const ROOT_URL = 'http://api.discogs.com';
 const PAGINATION = 'per_page=1&page=1';
+const SORT_ORDER = 'year,desc'
 
 async function newArtist(req, res, next) { 
     res.render('artists/new', { title: 'New Artist', artistData: undefined, invalidArtist: false });
@@ -41,7 +42,6 @@ async function create(req, res, next) {
     const correctArtist = req.body.correctArtist;
     if (correctArtist) {
         const artistId = req.body.artistId;
-        console.log(artistId);
         try {
             await fetch(`${ROOT_URL}/artists/${artistId}?key=${process.env.CONSUMER_KEY}&secret=${process.env.CONSUMER_SECRET}`)
             .then(result => result.json())
@@ -55,17 +55,39 @@ async function create(req, res, next) {
                         } 
                     }
                 }
+                async function releasesHelper(url, id, order) {
+                    const releasesArr = [];
+                    await fetch(`${url}/artists/${id}/releases?${order}}`)
+                        .then(releasesData => releasesData .json())
+                        .then(releasesData  => {
+                            for (const releaseData of releasesData.releases) {
+                                const release = {
+                                    title: releaseData.title,
+                                    year: releaseData.year,
+                                    thumb: releaseData.thumb,
+                                    reviews: [],
+                                    artist: releaseData.artist,
+                                    id: releaseData.id
+                                };
+                                releasesArr.push(release);
+                            }
+                        })
+                    return releasesArr
+                } 
                 const artistData = new Artist({
                     artistId: result.id,
                     name: result.name,
                     profile: result.profile,
-                    image: dataHelper(result.images)
-                }); 
+                    image: dataHelper(result.images),
+                    releases: await releasesHelper(ROOT_URL, artistId, SORT_ORDER)
+                });
+                console.log(artistData); 
                 await artistData.save()
-               // .then(res.redirect(`/releases/confirm/${artistId}`));
-            })
+                    .then(res.redirect('/'));
+            });
         } catch(err) {
-            console.log(err);
+            console.log(`Error in create function: ${err}`);
+            // res.status(500).send({ message: 'An error occurred while saving the artist data' });
         }
     } else {
         res.redirect('/artists/new'); 

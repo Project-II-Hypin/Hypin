@@ -7,7 +7,4 @@ const fetch = require('node-fetch');
 const releasesCtrl = require('../controllers/releases');
 
 
-// POST /<INSERT ROUTE NAME HERE> :
-router.post('/', releasesCtrl.create);
-
 module.exports = router;
