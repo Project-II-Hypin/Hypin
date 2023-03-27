@@ -39,3 +39,14 @@ passport.use(new GoogleStrategy(
     }
   ));
   
+  passport.serializeUser(function(user, cb) {
+    cb(null, user._id);
+  });
+
+ passport.deserializeUser(async function(userId, cb) {
+    cb(null, await User.findById(userId));
+    // The above async/await code replaces this code
+    // User.findById(userId).then(function(user) {
+    //   cb(null, user);
+    // });
+ });
