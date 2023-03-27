@@ -1,6 +1,7 @@
 const Release = require('./models/release');
 const ROOT_URL = 'http://api.discogs.com'
 const SORT_ORDER = 'year,desc'
+const fetch = require('node-fetch')
 
 /*
 async function create() {
