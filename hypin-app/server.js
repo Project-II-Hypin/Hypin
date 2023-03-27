@@ -42,7 +42,11 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/artists', artistsRouter); 
+//HOW will we track the change of this website from 1 to Many ICEBOX ?
+app.use('/releases', releasesRouter)
+app.use('/', usersRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
