@@ -4,9 +4,9 @@ const router = express.Router();
 const artistsCtrl = require('../controllers/artists');
 	
 // GET /artist
-router.get('/', artistsCtrl.index);
+// router.get('/', artistsCtrl.index);
 // GET /artist/releases/
-router.get('/new',)
+// router.get('/new',)
 // GET /artist/releases/:id (show functionality) MUST be below new route
 
 // POST /artists

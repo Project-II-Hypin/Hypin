@@ -22,8 +22,9 @@ const releaseSchema = new Schema({
     },
     year: Number,
     thumb: String,
-    reviews: [reviewSchema],
-    artist: String
+    artist: String,
+    id: Number,
+    reviews: [reviewSchema]
 });
 
 module.exports = mongoose.model('Release', releaseSchema);
