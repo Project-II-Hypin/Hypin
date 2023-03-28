@@ -1,6 +1,6 @@
 // Allows access to .env variables:
 require('dotenv').config();
-// const Artist = require('../models/artist');
+const Artist = require('./models/artist');
 //const Release = require('../models/release');
 
 // Allows Legacy users to use fetch:
@@ -15,7 +15,7 @@ const SORT_ORDER = 'year,desc';
 async function newArtist() {
     const query = 'nickleback';
     try {
-        const artistData = await fetch(`${ROOT_URL}/database/search?type=artist&q=${query}&${PAGINATION}&key=${process.env.CONSUMER_KEY}&secret=${process.env.CONSUMER_SECRET}`)
+        await fetch(`${ROOT_URL}/database/search?type=artist&q=${query}&${PAGINATION}&key=${process.env.CONSUMER_KEY}&secret=${process.env.CONSUMER_SECRET}`)
             .then(res => res.json())
             .then(res => console.log([res.results[0].title, res.results[0].id,]));
     } catch (err) {
@@ -23,13 +23,36 @@ async function newArtist() {
     };
 }
 
+
+
 async function create(req, res, next) {
-    const correctArtist = req.body.correctArtist;
-    console.log(correctArtist);
+    const correctArtist = true;
     if (correctArtist) {
-        const artistId = req.body.artistId;
-        const releasesData = await fetch(`${ROOT_URL}/artists/${artistId}`)
-        
+        const artistId = 5366710;
+        try {
+            await fetch(`${ROOT_URL}/artists/${artistId}?key=${process.env.CONSUMER_KEY}&secret=${process.env.CONSUMER_SECRET}`)
+            .then(res => res.json())
+            .then(async res => {
+                function dataHelper(data) {
+                    if (data) {
+                        return {
+                            height: data[0].height, 
+                            width: data[0].width, 
+                            url: data[0].resource_url
+                        } 
+                    }
+                }
+                const artistData = new Artist({
+                    artistId: res.id,
+                    name: res.name,
+                    profile: res.profile,
+                    image: dataHelper(res.images)
+                }); 
+                await artistData.save();
+            })
+        } catch(err) {
+            console.log(err);
+        }
     } else {
         res.redirect('/artists/new'); 
     }

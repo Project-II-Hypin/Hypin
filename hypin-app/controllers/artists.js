@@ -30,12 +30,30 @@ async function artistQuery(req, res, next) {
 
 async function create(req, res, next) {
     const correctArtist = req.body.correctArtist;
-    console.log(correctArtist);
     if (correctArtist) {
         const artistId = req.body.artistId;
+        console.log(artistId);
         try {
-            await fetch(`${ROOT_URL}/artists/${artistId}`)
-            
+            await fetch(`${ROOT_URL}/artists/${artistId}?key=${process.env.CONSUMER_KEY}&secret=${process.env.CONSUMER_SECRET}`)
+            .then(res => res.json())
+            .then(async res => {
+                function dataHelper(data) {
+                    if (data) {
+                        return {
+                            height: data[0].height, 
+                            width: data[0].width, 
+                            url: data[0].resource_url
+                        } 
+                    }
+                }
+                const artistData = new Artist({
+                    artistId: res.id,
+                    name: res.name,
+                    profile: res.profile,
+                    image: dataHelper(res.images)
+                }); 
+                await artistData.save();
+            })
         } catch(err) {
             console.log(err);
         }

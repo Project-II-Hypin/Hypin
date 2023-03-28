@@ -10,7 +10,12 @@ const artistSchema = new Schema({
         type: String,
         required: true
     },
-    profile: String
+    profile: String,
+    image: {
+        height: Number,
+        width: Number,
+        url: String
+    }
 });
 
 module.exports = mongoose.model('Artist', artistSchema);
