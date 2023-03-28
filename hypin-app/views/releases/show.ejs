@@ -7,6 +7,21 @@
 <div>album name</div>
 <!-- <div><%= release.title %>></div> -->
 
-<!-- REVIEW writing space -->
+<!-- REVIEW writing space NEEDs path-->
+<br><br><h2>Reviews</h2>
+<form>
+<textarea name="content"></textarea>
+<label>Rating:</label>
+<select name="rating">
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5" selected>5</option>
+</select>
+<input type="submit" value="Add Review">
+</form>
+
+<!-- add code for the displaying reviews HERE -->
 
 <%- include('../partials/footer') %>
