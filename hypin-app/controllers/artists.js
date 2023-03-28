@@ -100,7 +100,3 @@ module.exports = {
     create,
 
 };
-
-module.exports = {
-    new: newArtist,
-};
