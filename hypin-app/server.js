@@ -3,9 +3,21 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const session = require('express-session');
+const passport = require('passport');
+
+require('dotenv').config();
+require('./config/database');
+require('./config/passport');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+//HERE
+const artistsRouter = require('./routes/artists');
+//artist landing page
+// const releasesRouter = require('./routes/releases');
+
+
 
 const app = express();
 
@@ -19,8 +31,27 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//configuring and mounting the session middleware 
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: true
+}));
+
+//mounting the passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(function (req, res, next) {
+  res.locals.user = req.user;
+  next();
+});
+
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/artists', artistsRouter); 
+//HOW will we track the change of this website from 1 to Many ICEBOX ?
+// app.use('/releases', releasesRouter)
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
