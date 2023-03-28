@@ -6,7 +6,7 @@ const fetch = require('node-fetch');
 
 async function create() {
     try {
-        const artistId = 108713;
+        const artistId = 5210284;
         const releasesData = await fetch(`${ROOT_URL}/artists/${artistId}/releases?${SORT_ORDER}`)
             .then(res => res.json())
         for (const releaseData of releasesData.releases) {
