@@ -12,6 +12,8 @@ require('./config/passport');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const artistsRouter = require('./routes/artists')
+const releasesRouter = require('./routes/releases')
 
 const app = express();
 
