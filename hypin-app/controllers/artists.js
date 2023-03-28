@@ -14,7 +14,7 @@ const SORT_ORDER = 'year,desc';
 
 async function show(req, res) {
     //goal: populate the releases field of the artist doc
-    const artist = await Artist.findByID(req.params.id);
+    const artist = await Artist.findById(req.params.id);
     res.render('artists/show', { title:`${artist.name}`, artist })
 }
 
