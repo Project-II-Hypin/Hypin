@@ -9,6 +9,12 @@ const artistSchema = new Schema({
     name: {
         type: String,
         required: true
+    },
+    profile: String,
+    image: {
+        height: Number,
+        width: Number,
+        url: String
     }
 });
 
