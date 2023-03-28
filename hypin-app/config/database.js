@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
+const { options } = require('../routes');
 
-mongoose.connect(process.env.DATABASE_URL);
+mongoose.connect(process.env.DATABASE_URL)
+    .catch(err=>console.log(err));
+
 
 mongoose.connect(/*DATABASE_URL,*/ { 
     useNewUrlParser: true, 
