@@ -1,7 +1,0 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const ROOT_URL = 'https://api.discogs.com'
-
-// Allows for Roger to use fetch:
-const fetch = require('node-fetch');
-
