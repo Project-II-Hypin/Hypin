@@ -12,6 +12,13 @@ const ROOT_URL = 'http://api.discogs.com';
 const PAGINATION = 'per_page=1&page=1';
 const SORT_ORDER = 'year,desc'
 
+async function show(req, res) {
+    //goal: populate the releases field of the artist doc
+    const artist = await Artist.findByID(req.params.id);
+    res.render(`artists/${artist._id}`, { title:`${artist.name}`, artist })
+}
+
+
 async function newArtist(req, res, next) { 
     res.render('artists/new', { title: 'New Artist', artistData: undefined, invalidArtist: false });
 }
@@ -21,13 +28,19 @@ async function artistQuery(req, res, next) {
     try {
         await fetch(`${ROOT_URL}/database/search?type=artist&q=${query}&${PAGINATION}&key=${process.env.CONSUMER_KEY}&secret=${process.env.CONSUMER_SECRET}`)
             .then(result => result.json())
-            .then(result => {
+            .then(async result => {
                 if (result.results.length) {
-                    res.render('artists/new', {
-                        title: 'New Artist', 
-                        artistData: [result.results[0].title, result.results[0].id,],
-                        invalidArtist: false
-                    });
+                    const artistId = result.results[0].id
+                    const artistExists = await Artist.exists({ artistId: artistId })
+                    if (!artistExists) {
+                        res.render('artists/new', {
+                            title: 'New Artist', 
+                            artistData: [result.results[0].title, artistId],
+                            invalidArtist: false
+                        });
+                    } else {
+                        res.redirect(`/artists/${artistExists._id}`);
+                    }
                 } else {
                     res.render('artists/new', {title: 'New Artist', artistData: undefined, invalidArtist: true });
                 }
@@ -98,5 +111,5 @@ module.exports = {
     new: newArtist,
     query: artistQuery,
     create,
-
+    show
 };
