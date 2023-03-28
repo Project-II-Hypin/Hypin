@@ -11,6 +11,7 @@ router.get('/new', artistsCtrl.new);
 
 // POST /artists/new
 router.post('/new',artistsCtrl.query);
-
+// POST /artists
+router.post('/',artistsCtrl.create);
 	
 module.exports = router;

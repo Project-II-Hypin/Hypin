@@ -28,10 +28,20 @@ async function artistQuery(req, res, next) {
     };
 }
 
-
+async function create(req, res, next) {
+    const correctArtist = req.body.correctArtist;
+    console.log(correctArtist);
+    if (correctArtist) {
+        const artistId = req.body.artistId;
+        console.log(artistId);
+    } else {
+        res.redirect('/artists/new'); 
+    }
+}
 
 module.exports = {
     new: newArtist,
     query: artistQuery,
+    create,
  
 };

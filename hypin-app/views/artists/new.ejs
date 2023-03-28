@@ -8,9 +8,11 @@
         <label> Is this the artist you are looking for?
             <select name="correctArtist">
                 <option value="true">YES</option>
-                <option value="false">NO</option>
+                <option value="">NO</option>
             </select>
         </label><br><br>
+        <!-- The following hidden input is not very secure. Change eventually. -->
+        <input name="artistId" type="hidden" value="<%= artistData[1] %>">
         <button type="submit">SUBMIT</button>
     </form>
 <% } else { %>
