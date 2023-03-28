@@ -1,5 +1,9 @@
 <%- include('../partials/header') %>
 
+<% if (invalidArtist) { %>
+    <h3>Invalid Artist!</h3>
+    <p>Please try again.</p>
+<% } %>
 <% if (artistData) { %>
     <form action="/artists" method="POST">
         <label> Artist:

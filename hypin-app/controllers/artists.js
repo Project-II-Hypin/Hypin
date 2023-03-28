@@ -3,7 +3,6 @@ require('dotenv').config();
 
 // Requires models:
 const Artist = require('../models/artist');
-const Release = require('../models/release');
 
 // Allows Legacy users to use fetch:
 const fetch = require('node-fetch');
@@ -11,10 +10,9 @@ const fetch = require('node-fetch');
 // API call resources:
 const ROOT_URL = 'http://api.discogs.com';
 const PAGINATION = 'per_page=1&page=1';
-const SORT_ORDER = 'year,desc';
 
 async function newArtist(req, res, next) { 
-    res.render('artists/new', { title: 'New Artist', artistData: undefined });
+    res.render('artists/new', { title: 'New Artist', artistData: undefined, invalidArtist: false });
 }
 
 async function artistQuery(req, res, next) {
@@ -22,7 +20,18 @@ async function artistQuery(req, res, next) {
     try {
         await fetch(`${ROOT_URL}/database/search?type=artist&q=${query}&${PAGINATION}&key=${process.env.CONSUMER_KEY}&secret=${process.env.CONSUMER_SECRET}`)
             .then(result => result.json())
-            .then(result => res.render('artists/new', {title: 'New Artist', artistData: [result.results[0].title, result.results[0].id,]}));
+            .then(result => {
+                if (result.results.length) {
+                    res.render('artists/new', {
+                        title: 'New Artist', 
+                        artistData: [result.results[0].title, result.results[0].id,],
+                        invalidArtist: false
+                    });
+                } else {
+                    res.render('artists/new', {title: 'New Artist', artistData: undefined, invalidArtist: true });
+                }
+                
+            });
     } catch (err) {
         console.log(err);
     };
@@ -35,8 +44,8 @@ async function create(req, res, next) {
         console.log(artistId);
         try {
             await fetch(`${ROOT_URL}/artists/${artistId}?key=${process.env.CONSUMER_KEY}&secret=${process.env.CONSUMER_SECRET}`)
-            .then(res => res.json())
-            .then(async res => {
+            .then(result => result.json())
+            .then(async result => {
                 function dataHelper(data) {
                     if (data) {
                         return {
@@ -47,12 +56,13 @@ async function create(req, res, next) {
                     }
                 }
                 const artistData = new Artist({
-                    artistId: res.id,
-                    name: res.name,
-                    profile: res.profile,
-                    image: dataHelper(res.images)
+                    artistId: result.id,
+                    name: result.name,
+                    profile: result.profile,
+                    image: dataHelper(result.images)
                 }); 
-                await artistData.save();
+                await artistData.save()
+               // .then(res.redirect(`/releases/confirm/${artistId}`));
             })
         } catch(err) {
             console.log(err);
@@ -66,5 +76,5 @@ module.exports = {
     new: newArtist,
     query: artistQuery,
     create,
- 
+
 };

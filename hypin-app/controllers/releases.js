@@ -4,9 +4,9 @@ const SORT_ORDER = 'year,desc'
 // Allows Legacy users to use fetch:
 const fetch = require('node-fetch');
 
-async function create() {
+async function create(req, res, next) {
+    const artistId = req.query.artistId;
     try {
-        const artistId = 108713;
         const releasesData = await fetch(`${ROOT_URL}/artists/${artistId}/releases?${SORT_ORDER}`)
             .then(res => res.json())
         for (const releaseData of releasesData.releases) {
@@ -28,4 +28,5 @@ async function create() {
 
 module.exports = {
     create,
+    
 };
