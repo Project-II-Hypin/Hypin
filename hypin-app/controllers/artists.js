@@ -72,7 +72,9 @@ async function create(req, res, next) {
                     const thumb = await fetch(`${url}/masters/${id}?key=${process.env.CONSUMER_KEY}&secret=${process.env.CONSUMER_SECRET}`)
                     .then(result => result.json())
                     .then(result => {
-                        if (result.images.length) {
+                        if (!result.images) {
+                            return ''
+                        } else if (result.images.length) {
                             return result.images[0].uri
                         } else {
                             return ''
