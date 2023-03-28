@@ -22,8 +22,20 @@ async function newArtist() {
         console.log(err);
     };
 }
-// artist=${query}
-newArtist();
+
+async function create(req, res, next) {
+    const correctArtist = req.body.correctArtist;
+    console.log(correctArtist);
+    if (correctArtist) {
+        const artistId = req.body.artistId;
+        const releasesData = await fetch(`${ROOT_URL}/artists/${artistId}`)
+        
+    } else {
+        res.redirect('/artists/new'); 
+    }
+}
+
+create();
 
 module.exports = {
     new: newArtist,

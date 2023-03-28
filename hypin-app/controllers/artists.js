@@ -33,7 +33,12 @@ async function create(req, res, next) {
     console.log(correctArtist);
     if (correctArtist) {
         const artistId = req.body.artistId;
-        console.log(artistId);
+        try {
+            await fetch(`${ROOT_URL}/artists/${artistId}`)
+            
+        } catch(err) {
+            console.log(err);
+        }
     } else {
         res.redirect('/artists/new'); 
     }

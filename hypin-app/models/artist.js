@@ -9,7 +9,8 @@ const artistSchema = new Schema({
     name: {
         type: String,
         required: true
-    }
+    },
+    profile: String
 });
 
 module.exports = mongoose.model('Artist', artistSchema);
