@@ -10,12 +10,12 @@ const Artist = require('../models/artist');
 // API call resources:
 const ROOT_URL = 'http://api.discogs.com';
 const PAGINATION = 'per_page=1&page=1';
-const SORT_ORDER = 'year,desc'
+const SORT_ORDER = 'year,desc';
 
 async function show(req, res) {
     //goal: populate the releases field of the artist doc
     const artist = await Artist.findByID(req.params.id);
-    res.render(`artists/${artist._id}`, { title:`${artist.name}`, artist })
+    res.render('artists/show', { title:`${artist.name}`, artist })
 }
 
 
@@ -68,21 +68,35 @@ async function create(req, res, next) {
                         } 
                     }
                 }
+                async function releaseHelper(url, id) {
+                    const thumb = await fetch(`${url}/masters/${id}?key=${process.env.CONSUMER_KEY}&secret=${process.env.CONSUMER_SECRET}`)
+                    .then(result => result.json())
+                    .then(result => {
+                        if (result.images.length) {
+                            return result.images[0].uri
+                        } else {
+                            return ''
+                        }
+                    });
+                    return thumb
+                }
                 async function releasesHelper(url, id, order) {
                     const releasesArr = [];
-                    await fetch(`${url}/artists/${id}/releases?${order}}`)
+                    await fetch(`${url}/artists/${id}/releases?${order}?key=${process.env.CONSUMER_KEY}&secret=${process.env.CONSUMER_SECRET}}`)
                         .then(releasesData => releasesData .json())
-                        .then(releasesData  => {
+                        .then(async releasesData  => {
                             for (const releaseData of releasesData.releases) {
+                                if (releaseData.type === 'master') {
                                 const release = {
                                     title: releaseData.title,
                                     year: releaseData.year,
-                                    thumb: releaseData.thumb,
+                                    thumb: await releaseHelper(ROOT_URL, releaseData.id),
                                     reviews: [],
                                     artist: releaseData.artist,
                                     id: releaseData.id
                                 };
                                 releasesArr.push(release);
+                                }
                             }
                         })
                     return releasesArr
@@ -94,7 +108,6 @@ async function create(req, res, next) {
                     image: dataHelper(result.images),
                     releases: await releasesHelper(ROOT_URL, artistId, SORT_ORDER)
                 });
-                console.log(artistData); 
                 await artistData.save()
                     .then(res.redirect('/'));
             });
