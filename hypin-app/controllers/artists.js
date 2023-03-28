@@ -12,6 +12,13 @@ const ROOT_URL = 'http://api.discogs.com';
 const PAGINATION = 'per_page=1&page=1';
 const SORT_ORDER = 'year,desc'
 
+async function show(req, res) {
+    //goal: populate the releases field of the artist doc
+    const artist = await Artist.findByID(req.params.id);
+    res.render(`artists/${artist._id}`, { title:`${artist.name}`, artist })
+}
+
+
 async function newArtist(req, res, next) { 
     res.render('artists/new', { title: 'New Artist', artistData: undefined, invalidArtist: false });
 }
@@ -104,5 +111,5 @@ module.exports = {
     new: newArtist,
     query: artistQuery,
     create,
-
+    show
 };
