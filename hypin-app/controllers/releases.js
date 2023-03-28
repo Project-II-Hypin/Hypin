@@ -4,7 +4,10 @@ const SORT_ORDER = 'year,desc'
 // Allows Legacy users to use fetch:
 const fetch = require('node-fetch');
 
-async function create() {
+// Pulls all releases for an artist from the database:
+
+// Adds all releases for an artist to the database:
+async function create(req, res, next) {
     try {
         const artistId = 108713;
         const releasesData = await fetch(`${ROOT_URL}/artists/${artistId}/releases?${SORT_ORDER}`)
@@ -18,7 +21,6 @@ async function create() {
                    artist: releaseData.artist,
                    id: releaseData.id
                 });
-            console.log(release);
             await release.save();
         };
     } catch (err) {
