@@ -12,12 +12,8 @@ require('./config/passport');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-//HERE
-const artistsRouter = require('./routes/artists');
-//artist landing page
-// const releasesRouter = require('./routes/releases');
-
-
+const artistsRouter = require('./routes/artists')
+const releasesRouter = require('./routes/releases')
 
 const app = express();
 
@@ -50,7 +46,8 @@ app.use(function (req, res, next) {
 app.use('/', indexRouter);
 app.use('/artists', artistsRouter); 
 //HOW will we track the change of this website from 1 to Many ICEBOX ?
-// app.use('/releases', releasesRouter)
+app.use('/releases', releasesRouter)
+app.use('/', usersRouter);
 
 
 // catch 404 and forward to error handler

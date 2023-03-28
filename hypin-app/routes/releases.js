@@ -6,5 +6,4 @@ const fetch = require('node-fetch');
 
 const releasesCtrl = require('../controllers/releases');
 
-
 module.exports = router;
