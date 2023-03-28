@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -10,17 +11,23 @@
 
 
 <body>
- <nav>
-  <a href="/artists/new">NEW ARTIST</a>
-   <!-- <img src="/images/camera.svg"> -->
-   <a href="/artists/ARTIST_ID">ARTIST TITLE</a>
+
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup"></div>
+    <div class="navbar-nav">
+      <a class="nav-link" href="/artists/new">Find ARTIST</a>
+      <!-- <img src="/images/camera.svg"> -->
  <!-- would the next line be artist/:id/releases? -->
-     <a href="/artists/releases">RELEASES?</a>
-     <a href="/reviews">Reviews??</a>
-     <a href="/logout">LOG OUT</a>
-
+      <a class="nav-link" href="/artists/releases">RELEASES?</a>
+      <a class="nav-link" href="/reviews">Reviews??</a>
+      <a class="nav-link" href="/logout">LOG OUT</a>
      <!-- <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a> -->
-
+    </div>
+  </div>
+</div>
  </nav>
  <main>
-   <h1><%= title %></h1>
