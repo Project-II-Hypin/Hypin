@@ -21,13 +21,19 @@ async function artistQuery(req, res, next) {
     try {
         await fetch(`${ROOT_URL}/database/search?type=artist&q=${query}&${PAGINATION}&key=${process.env.CONSUMER_KEY}&secret=${process.env.CONSUMER_SECRET}`)
             .then(result => result.json())
-            .then(result => {
+            .then(async result => {
                 if (result.results.length) {
-                    res.render('artists/new', {
-                        title: 'New Artist', 
-                        artistData: [result.results[0].title, result.results[0].id,],
-                        invalidArtist: false
-                    });
+                    const artistId = result.results[0].id
+                    const artistExists = await Artist.exists({ artistId: artistId })
+                    if (!artistExists) {
+                        res.render('artists/new', {
+                            title: 'New Artist', 
+                            artistData: [result.results[0].title, artistId],
+                            invalidArtist: false
+                        });
+                    } else {
+                        res.redirect(`/artists/${artistExists._id}`);
+                    }
                 } else {
                     res.render('artists/new', {title: 'New Artist', artistData: undefined, invalidArtist: true });
                 }

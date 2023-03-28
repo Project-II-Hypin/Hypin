@@ -30,7 +30,8 @@ const releaseSchema = new Schema({
 const artistSchema = new Schema({
     artistId: {
         type: Number,
-        required: true
+        required: true,
+        unique: true
     },
     name: {
         type: String,
