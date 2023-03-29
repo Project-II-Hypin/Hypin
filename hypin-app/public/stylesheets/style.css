@@ -91,3 +91,7 @@ a {
 .login img {
   height: 30px;
 }
+
+.container {
+    align-items: center;
+}
