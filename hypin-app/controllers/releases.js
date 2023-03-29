@@ -15,7 +15,6 @@ async function show(req, res) {
         });
 }
 
-
 module.exports = {
     show,
 };
