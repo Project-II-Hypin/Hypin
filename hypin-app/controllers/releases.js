@@ -7,15 +7,13 @@ const fetch = require('node-fetch');
 const Artist = require("../models/artist")
 
 async function show(req, res) {
-    //match the release id to the number that in my file
-    //goal: populate the releases field of the artist doc
-    console.log(req);
-    const artist = await Artist.findById(req.params.id);
-    console.log(artist);
-    //const release = artist.releases.find( release => release.title === "");
-    res.render(':id/show', { title:`${artist.name}`, release })
+    const idArr = req.params.id.split(':');
+    await Artist.findById(idArr[1])
+        .then(result => {
+            const release = result.releases.find( rel => `${rel._id}` === idArr[0]);
+            res.render('releases/show', { title:`${release.title}`, release })
+        });
 }
-
 
 module.exports = {
     show,
