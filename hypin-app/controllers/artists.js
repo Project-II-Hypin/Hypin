@@ -11,14 +11,16 @@ const PAGINATION = 'per_page=1&page=1';
 const SORT_ORDER = 'year,desc';
 
 async function show(req, res) {
-    //goal: populate the releases field of the artist doc
     const artist = await Artist.findById(req.params.id);
     res.render('artists/show', { title:`${artist.name}`, artist, paramsId: req.params.id })
 }
 
-
 async function newArtist(req, res, next) { 
     res.render('artists/new', { title: 'New Artist', artistData: undefined, invalidArtist: false });
+}
+
+async function findArtist(req, res, next) { 
+    res.render('artists/new', { title: 'Find Artist', artistData: undefined, artistFound: false });
 }
 
 async function artistQuery(req, res, next) {
@@ -123,6 +125,7 @@ async function create(req, res, next) {
 
 module.exports = {
     new: newArtist,
+    find: findArtist,
     query: artistQuery,
     create,
     show

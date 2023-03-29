@@ -11,6 +11,7 @@ require('dotenv').config();
 require('./config/database');
 require('./config/passport');
 
+// Requires routers:
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const artistsRouter = require('./routes/artists')
@@ -47,8 +48,7 @@ app.use(function (req, res, next) {
 
 app.use('/', indexRouter);
 app.use('/artists', artistsRouter); 
-//HOW will we track the change of this website from 1 to Many ICEBOX ?
-app.use('/releases', releasesRouter)
+app.use('/releases', releasesRouter);
 app.use('/', usersRouter);
 
 
