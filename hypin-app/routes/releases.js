@@ -3,13 +3,8 @@ const router = express.Router();
 // You'll be creating this controller module next
 const releasesCtrl = require('../controllers/releases');
 
-// // GET /movies
-// router.get('/', releasesCtrl.index);
-// // GET /movies/new
-// router.get('/new', releasesCtrl.new);
-// // GET /movies/:id (show functionality) MUST be below new route
-// router.get('/:id', releasesCtrl.show);
-// // POST /movies
-// router.post('/', releasesCtrl.create);
+// WHAT getting a showpage to render for our releases based on the ID 
+router.get("/:id/show", releasesCtrl.show)
+//now go build the show ctrlr
 
 module.exports = router;
