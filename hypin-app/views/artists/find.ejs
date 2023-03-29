@@ -1,31 +1,17 @@
 <%- include('../partials/header') %>
 
-<% if (invalidArtist) { %>
-    <h3>Invalid Artist!</h3>
-    <p>Please try again.</p>
-<% } %>
-<% if (artistData) { %>
-    <form action="/artists" method="POST">
-        <label> Artist:
-            <h5><%= artistData[0] %></h5>
-        </label><br>
-        <label> Is this the artist you are looking for?
-            <select name="correctArtist">
-                <option value="true">YES</option>
-                <option value="">NO</option>
-            </select>
-        </label><br><br>
-        <!-- The following hidden input is not very secure. Change eventually. -->
-        <input name="artistId" type="hidden" value="<%= artistData[1] %>">
-        <button type="submit">SUBMIT</button>
-    </form>
+<% if (artistNotFound) { %>
+    <h3>ARTIST NOT FOUND!</h3>
+    <p>Please try again.<br><i>Search is case sensitive!</i></p>
 <% } else { %>
-<form action="/artists/new" method="POST">
+    <h3>FIND AN ARTIST!</h3>
+    <p>Enter a name into the field.<br><i>Search is case sensitive!</i></p>
+<% } %>
+<form action="/artists/find" method="POST">
     <label> Artist Name:
         <input name="artistname" type="text">
     </label><br><br>
     <button type="submit">SUBMIT</button>
 </form>
-<% } %>
 
 <%- include('../partials/footer') %>

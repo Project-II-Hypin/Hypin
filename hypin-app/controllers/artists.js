@@ -20,7 +20,18 @@ async function newArtist(req, res, next) {
 }
 
 async function findArtist(req, res, next) { 
-    res.render('artists/new', { title: 'Find Artist', artistData: undefined, artistFound: false });
+    res.render('artists/find', { title: 'Find Artist', artistNotFound: false });
+}
+
+async function artistFinder(req, res, next) {
+    const query = req.body.artistname;
+    const artist = await Artist.findOne({ name: query })
+    console.log(artist)
+    if (artist) {
+        res.redirect(`/artists/${artist._id}`);
+    } else {
+        res.render('artists/find', { title: 'Find Artist', artistNotFound: true });
+    }
 }
 
 async function artistQuery(req, res, next) {
@@ -126,6 +137,7 @@ async function create(req, res, next) {
 module.exports = {
     new: newArtist,
     find: findArtist,
+    finder: artistFinder,
     query: artistQuery,
     create,
     show

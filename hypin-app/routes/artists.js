@@ -14,10 +14,12 @@ router.get('/find',artistsCtrl.find);
 // GET /artists/:id
 router.get('/:id', artistsCtrl.show);
 
-// POST /artists/new
-router.post('/new',artistsCtrl.query);
 // POST /artists
 router.post('/',artistsCtrl.create);
+// POST /artists/new
+router.post('/new',artistsCtrl.query);
+// POST /artists/find
+router.post('/find',artistsCtrl.finder);
 
 
 	
