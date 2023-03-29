@@ -7,11 +7,12 @@ const fetch = require('node-fetch');
 const Artist = require("../models/artist")
 
 async function show(req, res) {
-    // //goal: populate the releases field of the artist doc
-    // const artist = await Artist.findById(req.params.id);
-    // //Do i need to populate here?
-    // artist.releases.find( realease => realease === "" )
-    // res.render(':id/show', { title:`${artist.name}`, artist })
+    const idArr = req.params.id.split(':');
+    await Artist.findById(idArr[1])
+        .then(result => {
+            const release = result.releases.find( rel => `${rel._id}` === idArr[0]);
+            res.render('releases/show', { title:`${release.title}`, release })
+        });
 }
 
 
