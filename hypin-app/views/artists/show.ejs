@@ -1,16 +1,18 @@
 <!-- releases gallery -->
 <%- include("../partials/header") %>
 
-<h1 class="fw-light text-center text-lg-start mt-4 mb-0">Artist Page</h1>
+<h1 class="fw-light text-center text-lg-start mt-4 mb-0"> <%= artist.name %></h1> <br>
+<p class="text-center"> <%= artist.profile %> </p>
 <div class="container">
 <% artist.releases.forEach(function(rel) { %>
         <!-- top margin -->
         <hr class="mt-2 mb-5"> 
         <!-- tiles for the images.  -->
         <div class="row text-center text-lg-start">
+            <h3 class="text center"> <%= rel.title %> (<%= rel.year %>) </h3>
             <div class="col-lg-12 col-md-4 col-6">
-                <a href="<%= `../releases/${rel._id}:${paramsId}/show` %>" class="d-block mb-4 h-100">
-                    <img class="img-fluid img-thumbnail" src= "<%= rel.thumb %>" alt="">
+                <a href="<%= `../releases/${rel._id}:${paramsId}/show` %>" class="text-center d-block mb-4 h-100">
+                    <img class="img-fluid img-thumbnail" src= "<%= rel.thumb %>" alt=""> 
                 </a>
             </div>
         </div>
