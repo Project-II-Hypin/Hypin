@@ -134,11 +134,28 @@ async function create(req, res, next) {
     }
 }
 
+function addToFavorites(req, res) {
+	Artist.findOne({ id: req.body.id })
+		.then((artist) => {
+			if (artist) {
+                console.log(req.user._id)
+				artist.favoritedBy.push(req.user._id);
+				artist.save().then(() => {
+					res.redirect(`/artists/${req.body.id}`);
+				});
+			}
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+}
+
 module.exports = {
     new: newArtist,
     find: findArtist,
     finder: artistFinder,
     query: artistQuery,
     create,
-    show
+    show,
+    addToFavorites
 };
