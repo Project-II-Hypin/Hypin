@@ -26,7 +26,6 @@ async function findArtist(req, res, next) {
 async function artistFinder(req, res, next) {
     const query = req.body.artistname;
     const artist = await Artist.findOne({ name: query })
-    console.log(artist)
     if (artist) {
         res.redirect(`/artists/${artist._id}`);
     } else {
@@ -127,7 +126,6 @@ async function create(req, res, next) {
             });
         } catch(err) {
             console.log(`Error in create function: ${err}`);
-            // res.status(500).send({ message: 'An error occurred while saving the artist data' });
         }
     } else {
         res.redirect('/artists/new'); 

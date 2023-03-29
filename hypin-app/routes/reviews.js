@@ -1,11 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const reviewsCtrl = require('../controllers/favorites');
-const ensureLoggedIn = require('../config/ensureLoggedIn')
 
-// POST /movies/:id/reviews (create review for a movie)
-router.post('/releases/:id/reviews', ensureLoggedIn, reviewsCtrl.create);
+// Requires artists contoller functions:
+const reviewsCtrl = require('../controllers/reviews');
+// Requires oAuth middleware:
+const ensureLoggedIn = require('../config/ensureLoggedIn');
 
-router.delete('/reviews/:id', ensureLoggedIn, reviewsCtrl.delete)
+// POST /reviews
+router.post('/', ensureLoggedIn, reviewsCtrl.create);
+
+// DELETE /reviews/:id
+router.delete('/:id', ensureLoggedIn, reviewsCtrl.delete);
 
 module.exports = router;

@@ -4,56 +4,65 @@
 <img class="img-fluid img-thumbnail" src= "<%= release.thumb %>" alt="">
 <h3><%= release.title %></h3> <h3><%= release.artist %></h3>
 
-<!-- REVIEW writing space NEEDs path-->
-<br><br><h2>Reviews</h2>
-<form>
-<textarea name="content"></textarea>
-<label>Rating:</label>
-<select name="rating">
-  <option value="1">1</option>
-  <option value="2">2</option>
-  <option value="3">3</option>
-  <option value="4">4</option>
-  <option value="5" selected>5</option>
-</select>
-<input type="submit" value="Add Review">
-</form>
 
-<% if (release.reviews.length) { %>
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Date</th>
-      <th>Review</th>
-      <th>Rating</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% let total = 0 %>
-    <% release.reviews.forEach(function(r) { %>
-      <% total += r.rating %>
+<br><br><h2>Reviews</h2>
+<% if (user) { %>
+  <p>Review Form:</p>
+  <form action="/reviews" method="POST">
+    <input name="redirectURL" type="hidden" value="<%= redirectURL %>">
+    <input name="id" type="hidden" value="<%= release._id %>">
+    <label>Content:
+      <textarea name="content"></textarea>
+    </label><br>
+    <label>Rating:
+      <select name="rating">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5" selected>5</option>
+      </select>
+    </label><br>
+    <input type="submit" value="Add Review">
+  </form>
+<% } %>
+
+<% if (reviews.length) { %>
+  <table>
+    <thead>
       <tr>
-        <td class="review-user"><img alt="avatar" src="<%= r.userAvatar %> referrerpolicy="no-referrer" ><%= r.userName %></td>
-        <td><%= r.createdAt.toLocaleDateString() %></td>
-        <td><%= r.content %></td>
-        <td><%= r.rating %></td>
-        <td>
-          <% if (user?._id.equals(r.user)) { %>
-            <form action="/reviews/<%= r._id %>?_method=DELETE" method="POST">
-              <button type="submit">X</button>
-            </form>
-          <% } %>
-        </td>
+        <th>User</th>
+        <th>Date</th>
+        <th>Review</th>
+        <th>Rating</th>
+        <th></th>
       </tr>
-    <% }); %>
-    <tr>
-      <td colspan="3"></td>
-      <td><strong><%= (total / movie.reviews.length).toFixed(1) %></strong></td>
-    </tr>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% let total = 0 %>
+      <% reviews.forEach(function(r) { %>
+        <% total += r.rating %>
+        <tr>
+          <td class="review-user"><img alt="avatar" src="<%= r.userAvatar %> referrerpolicy="no-referrer" ><%= r.username %></td>
+          <td><%= r.createdAt.toLocaleDateString() %></td>
+          <td><%= r.content %></td>
+          <td><%= r.rating %></td>
+          <td>
+            <% if (user?._id.equals(r.userId)) { %>
+              <form action="/reviews/<%= r._id %>?_method=DELETE" method="POST">
+                <input name="redirectURL" type="hidden" value="<%= redirectURL %>">
+                <button type="submit">X</button>
+              </form>
+            <% } %>
+          </td>
+        </tr>
+      <% }); %>
+      <tr>
+        <td colspan="3"></td>
+        <td><strong><%= (total / reviews.length).toFixed(1) %></strong></td>
+      </tr>
+    </tbody>
+  </table>
 <% } else { %>
   <h3>No Reviews Yet!</h3>
 <% } %>

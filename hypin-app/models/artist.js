@@ -9,8 +9,7 @@ const releaseSchema = new Schema({
     year: Number,
     thumb: String,
     artist: String,
-    id: Number,
-    reviews: []
+    id: Number
 });
 
 const artistSchema = new Schema({

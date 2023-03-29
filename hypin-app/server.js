@@ -14,8 +14,9 @@ require('./config/passport');
 // Requires routers:
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const artistsRouter = require('./routes/artists')
-const releasesRouter = require('./routes/releases')
+const artistsRouter = require('./routes/artists');
+const releasesRouter = require('./routes/releases');
+const reviewsRouter = require('./routes/reviews');
 
 const app = express();
 
@@ -50,6 +51,7 @@ app.use('/', indexRouter);
 app.use('/artists', artistsRouter); 
 app.use('/releases', releasesRouter);
 app.use('/', usersRouter);
+app.use('/reviews', reviewsRouter);
 
 
 // catch 404 and forward to error handler
