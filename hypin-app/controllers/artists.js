@@ -1,3 +1,6 @@
+// Allows access to .env variables:
+require('dotenv').config();
+
 // Requires models:
 const Artist = require('../models/artist');
 
