@@ -5,7 +5,7 @@
 const Artist = require('../models/artist');
 
 // // Allows Legacy users to use fetch:
-// const fetch = require('node-fetch');
+const fetch = require('node-fetch');
 
 // API call resources:
 const ROOT_URL = 'http://api.discogs.com';
@@ -37,12 +37,13 @@ async function artistQuery(req, res, next) {
                             title: 'New Artist', 
                             artistData: [result.results[0].title, artistId],
                             invalidArtist: false
-                        });
+                        })
                     } else {
                         res.redirect(`/artists/${artistExists._id}`);
                     }
                 } else {
                     res.render('artists/new', {title: 'New Artist', artistData: undefined, invalidArtist: true });
+                    res.redirect(`/artists/${artist._id}`);
                 }
                 
             });
@@ -111,7 +112,7 @@ async function create(req, res, next) {
                     releases: await releasesHelper(ROOT_URL, artistId, SORT_ORDER)
                 });
                 await artistData.save()
-                    .then(res.redirect('/'));
+                    .then(res.redirect(`/artists/${artistData._id}`));
             });
         } catch(err) {
             console.log(`Error in create function: ${err}`);
