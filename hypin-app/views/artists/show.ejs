@@ -1,7 +1,9 @@
 <!-- releases gallery -->
 <%- include("../partials/header") %>
 
+
 <h1 class="fw-light text-center text-lg-start mt-4 mb-0"> <%= artist.name %></h1> <br>
+<!-- ADD CONDITIONAL FOR EMPLTY PROFILE -->
 <p class="text-center"> <%= artist.profile %> </p>
 <div class="container">
 <% artist.releases.forEach(function(rel) { %>
