@@ -1,11 +1,8 @@
 <%- include('../partials/header') %>
 
-<h1>Artist Page</h1>
-<!-- <h1><%= artist.name %></h1> -->
-<!-- section: release 1 NEEDS label--> 
-<div>Album Art</div>
-<div>album name</div>
-<!-- <div><%= release.title %>></div> -->
+<h1><%= release.artist %></h1>
+<img class="img-fluid img-thumbnail" src= "<%= release.thumb %>" alt="">
+<h3><%= release.title %></h3>
 
 <!-- REVIEW writing space NEEDs path-->
 <br><br><h2>Reviews</h2>
@@ -22,6 +19,7 @@
 <input type="submit" value="Add Review">
 </form>
 
+<% if (release.reviews.length) { %>
 <table>
   <thead>
     <tr>
@@ -56,7 +54,9 @@
     </tr>
   </tbody>
 </table>
+<% } else { %>
+  <h3>No Reviews Yet!</h3>
+<% } %>
 
-<!-- add code for the displaying reviews HERE -->
 
 <%- include('../partials/footer') %>
