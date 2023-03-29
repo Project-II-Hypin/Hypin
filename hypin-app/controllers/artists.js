@@ -1,11 +1,9 @@
-// Allows access to .env variables:
-require('dotenv').config();
 
 // Requires models:
 const Artist = require('../models/artist');
 
-// // Allows Legacy users to use fetch:
-const fetch = require('node-fetch');
+// Allows Legacy users to use fetch:
+// const fetch = require('node-fetch');
 
 // API call resources:
 const ROOT_URL = 'http://api.discogs.com';
