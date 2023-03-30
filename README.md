@@ -7,14 +7,14 @@
 ### Resources:
 
 **TECHNOLOGIES USED:**
-Languages: <br />
+<br />Languages: 
 ![JavaScript Logo.](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black "JS Logo")
 ![CSS Logo.](https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white "CSS Logo")
 ![HTML Logo.](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white "HTML Logo")
-Frameworks: <br />
+<br />Frameworks: 
 ![Bootstrap Logo](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white "Bootstrap Logo")
 This project was created using JavaScript, HTML(EJS), and CSS.
-Hosting: <br />
+<br />Hosting: 
 ![MongoDb.](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white "MongoDb")
 ![Heroku](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white "Heroku")
 
@@ -26,7 +26,7 @@ Hosting: <br />
 The code was written using Visual Studio Code and visual assets created using GNU Image Manipulation Program. 
 
 **API USED:**
-(<Discogs stuff here>)
+(-Discogs stuff here-)
 
 ### Getting Started:
 
