@@ -1,10 +1,10 @@
-* {
+ * {
   box-sizing: border-box;
   font-family: Helvetica;
   color: #424748;
 }
 
-/* body {
+ body {
   margin: 0;
   height: 100vh;
   display: grid;
@@ -21,14 +21,16 @@ body > nav {
   justify-content: flex-end;
   align-items: center;
   padding: 0 20px 0 30px;
-} */
+} 
 
-nav /*> img*/ {
+/* sets navigation up to be visible and contained */
+nav {
   width: 34px;
   object-fit: contain;
   margin-right: auto;
 }
 
+/* adds background color and styling for the front page.  */
 body > main {
   grid-area: main;
   display: flex;
@@ -60,7 +62,6 @@ nav > a.active {
   cursor: default;
 }
 
-
 /* body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -68,7 +69,7 @@ nav > a.active {
 
 a {
   color: #00B7FF;
-} */
+} 
 
 .review-user {
   display: flex;
@@ -80,7 +81,7 @@ a {
   border-radius: 50%;
   height: 40px;
 }
-
+*/
 .login {
   display: flex;
   justify-content: center;

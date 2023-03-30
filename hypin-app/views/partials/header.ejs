@@ -11,39 +11,27 @@
 
 
 <body>
-  <!-- DO I need to wrap another nav around this one to make it work fully -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <!-- changed the line below from brand to nav -->
-        <a class="navbar-nav" href="#">HYPE</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <!-- changed below line from navbarNavAltMarkup -->
-        <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+  <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <div class="container">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="/">HOME</a>
+            <a class="nav-link" href="/artists/new">NEW</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/artists/new">NEW ARTIST</a>
+            <a class="nav-link" href="/artists/find">FIND</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/artists/find">FIND ARTIST</a>
-          </li>
-          <li class="nav-item">
-          <% if (user) { %>
-            <a class="nav-link" href="/logout">LOG OUT</a>
-            <% } else { %>
-              <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
-          <% } %>
+            <% if (user) { %>
+              <a class="nav-link" href="/logout">LOG OUT</a>
+              <% } else { %>
+                <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
+                <% } %>
           </li>
         </ul>
       </div>
-    </div>
   </nav>
 
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Navbar</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,6 +46,6 @@
         </div>
       </div>
     </div>
-  </nav>
-  
+  </nav> -->
+
   <main>
