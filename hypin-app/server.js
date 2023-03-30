@@ -5,19 +5,18 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
 const passport = require('passport');
+const methodOverride = require('method-override');
 
 require('dotenv').config();
 require('./config/database');
 require('./config/passport');
 
+// Requires routers:
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-//HERE
 const artistsRouter = require('./routes/artists');
-//artist landing page
 const releasesRouter = require('./routes/releases');
-
-
+const reviewsRouter = require('./routes/reviews');
 
 const app = express();
 
@@ -29,6 +28,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //configuring and mounting the session middleware 
@@ -49,8 +49,9 @@ app.use(function (req, res, next) {
 
 app.use('/', indexRouter);
 app.use('/artists', artistsRouter); 
-//HOW will we track the change of this website from 1 to Many ICEBOX ?
-app.use('/releases', releasesRouter)
+app.use('/releases', releasesRouter);
+app.use('/', usersRouter);
+app.use('/reviews', reviewsRouter);
 
 
 // catch 404 and forward to error handler

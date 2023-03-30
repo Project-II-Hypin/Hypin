@@ -12,18 +12,22 @@ const reviewSchema = new Schema({
         max: 5,
         default: 3,
         required: true
-    } 
-});
-
-const releaseSchema = new Schema({
-    title: {
+    },
+    username: {
         type: String,
         required: true
     },
-    year: Number,
-    thumb: String,
-    reviews: [reviewSchema],
-    artist: String
+    userAvatar: String,
+    userId: {
+        type: String,
+        required: true
+    },
+    releaseId: {
+        type: String,
+        required: true
+    }
+},  {
+    timestamps: true
 });
 
-module.exports = mongoose.model('Release', releaseSchema);
+module.exports = mongoose.model('Review', reviewSchema);
