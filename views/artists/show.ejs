@@ -17,7 +17,11 @@
             <h3 class="text center"> <%= rel.title %> (<%= rel.year %>) </h3>
             <div class="col-lg-12 col-md-4 col-6">
                 <a href="<%= `../releases/${rel._id}:${paramsId}/show` %>" class="text-center d-block mb-4 h-100">
-                    <img class="img-fluid img-thumbnail" src= "<%= rel.thumb %>" alt="">
+                    <% if (rel.thumb) { %>
+                        <img class="img-fluid img-thumbnail" src= "<%= rel.thumb %>" alt="">
+                    <% } else { %>
+                        <img id="placeholder-svg" class="img-fluid img-thumbnail" src= "/images/placeholder.svg" alt="">
+                    <% } %>
                 </a>
             </div>
         </div>

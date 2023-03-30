@@ -96,3 +96,8 @@ a {
 .container {
     align-items: center;
 }
+
+#placeholder-svg {
+  height: 600px;
+  width: 600px;
+}
