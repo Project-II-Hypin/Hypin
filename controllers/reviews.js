@@ -11,7 +11,6 @@ async function create(req, res, next) {
             userId: req.user._id,
             releaseId: req.body.id,
         }
-        console.log(review);
         await Review.create(review);
         res.redirect(`/releases/${req.body.redirectURL}/show`);
     } catch (error) {

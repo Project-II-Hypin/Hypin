@@ -17,8 +17,10 @@
     </div>
 </div>
     <% if (user) { %>
-        <button id="favorite-btn" method="POST" action ="/artists/<%= artist._id %>">Add to favorites</button>
-        <% } %>
+        <form action="/favorites/<%= artist._id %>" method="POST">
+            <button button-type="submit" id="favorite-btn" >Add to favorites</button>
+        </form>
+    <% } %>
 <% artist.releases.forEach(function(rel) { %>
         <!-- top margin -->
         <hr class="mt-2 mb-5"> 

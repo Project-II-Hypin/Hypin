@@ -95,7 +95,7 @@ async function create(req, res, next) {
                 }
                 async function releasesHelper(url, id, order) {
                     const releasesArr = [];
-                    await fetch(`${url}/artists/${id}/releases?${order}?key=${process.env.CONSUMER_KEY}&secret=${process.env.CONSUMER_SECRET}}`)
+                    await fetch(`${url}/artists/${id}/releases?${order}?key=${process.env.CONSUMER_KEY}&secret=${process.env.CONSUMER_SECRET}`)
                         .then(releasesData => releasesData .json())
                         .then(async releasesData  => {
                             for (const releaseData of releasesData.releases) {
@@ -132,22 +132,6 @@ async function create(req, res, next) {
     }
 }
 
-function addToFavorites(req, res) {
-	Artist.findOne({ id: req.body.id })
-		.then((artist) => {
-			if (artist) {
-                console.log(req.user._id)
-				artist.favoritedBy.push(req.user._id);
-				artist.save().then(() => {
-					res.redirect(`/artists/${req.body.id}`);
-				});
-			}
-		})
-		.catch((err) => {
-			console.log(err);
-		});
-}
-
 module.exports = {
     new: newArtist,
     find: findArtist,
@@ -155,5 +139,4 @@ module.exports = {
     query: artistQuery,
     create,
     show,
-    addToFavorites
 };

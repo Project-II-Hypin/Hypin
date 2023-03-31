@@ -1,10 +1,15 @@
 const express = require('express');
 const router = express.Router();
+
+// Requires artists contoller functions:
 const favoritesCtrl = require('../controllers/favorites');
+// Requires oAuth middleware:
 const ensureLoggedIn = require('../config/ensureLoggedIn');
 
-router.post('/artists/:id/favorites', ensureLoggedIn, favoritesCtrl);
+// POST /favorites
+router.post('/:id', ensureLoggedIn, favoritesCtrl.create);
 
-router.delete('/artist/:id', ensureLoggedIn, favoritesCtrl);
+// DELETE /favorites/:id
+// router.delete('/', ensureLoggedIn, favoritesCtrl.delete);
 
 module.exports = router;

@@ -69,3 +69,6 @@ fetch(`${endpoint}/database/search?q=${artistName}&type=artist&key=${apiKey}`)
     console.log(releases);
   })
   .catch(error => console.error(error));
+
+
+  /*  // DO NOT DELETE!!! This file lived for a long time. It gets to stay. <'-'> //  */
