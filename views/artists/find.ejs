@@ -1,11 +1,13 @@
 <%- include('../partials/header') %>
 
 <% if (artistNotFound) { %>
-    <h3>ARTIST NOT FOUND!</h3>
-    <p>Please try again.<br><i>Search is case sensitive!</i></p>
+    <h1 class="main-title">ARTIST NOT FOUND!</h1>
+    <h4>Please try again.</h4>
+    <h5><i>Search is case sensitive!</i></h5><br>
 <% } else { %>
-    <h3>FIND AN ARTIST!</h3>
-    <p>Enter a name into the field.<br><i>Search is case sensitive!</i></p>
+    <h1 class="main-title">FIND AN ARTIST!</h1>
+    <h4>Enter a name into the field.</h4>
+    <h5><i>Search is case sensitive!</i></h5><br>
 <% } %>
 <form action="/artists/find" method="POST">
     <label> Artist Name:
