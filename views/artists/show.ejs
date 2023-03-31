@@ -2,10 +2,20 @@
 <%- include("../partials/header") %>
 
 
-<h1 class="fw-light text-center text-lg-start mt-4 mb-0"> <%= artist.name %></h1> <br>
-<!-- ADD CONDITIONAL FOR EMPLTY PROFILE -->
-<p class="text-center"> <%= artist.profile %> </p>
-<div class="container">
+<div class="accordion" id="profileAccordion">
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#profileCollapse" aria-expanded="false" aria-controls="profileCollapse" style="transition: height 1.5s ease; background:#6A3C1A;color: white">
+          Show Profile
+        </button>
+      </h2>
+      <div id="profileCollapse" class="accordion-collapse collapse" aria-labelledby="profileHeading" data-bs-parent="#profileAccordion">
+        <div class="accordion-body" style="color:black">
+          <%= artist.profile %>
+        </div>
+      </div>
+    </div>
+</div>
     <% if (user) { %>
         <button id="favorite-btn" method="POST" action ="/artists/<%= artist._id %>">Add to favorites</button>
         <% } %>

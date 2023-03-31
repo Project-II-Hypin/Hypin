@@ -1,15 +1,11 @@
-
-
-@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
-
-
  * {
   box-sizing: border-box;
   font-family: Helvetica;
+  color: #424748;
 }
 
  body {
-  margin: -3.125rem;
+  margin: 0;
   height: 100vh;
   display: grid;
   grid-template-rows: 50px 1fr;
@@ -20,7 +16,7 @@
 
 body > nav {
   grid-area: nav;
-  background-color: #72bbce;
+  background-color: #B8C0C2;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -29,46 +25,20 @@ body > nav {
 
 /* sets navigation up to be visible and contained */
 nav {
-  min-width: 100%;
+  width: 34px;
   object-fit: contain;
   margin-right: auto;
-  background: #6A3C1A;
 }
 
-.navbar-nav  {
-  /* adding nav bar color */
-  background-color: #6A3C1A;
-}
-.navbar {
-  /* adding nav bar color */
-  background-color:#6A3C1A;
-}
-.container-fluid {
-  /* adding nav bar color */
-  background-color:#6A3C1A;
-}
-
-
-
-
-
+/* adds background color and styling for the front page.  */
 body > main {
   grid-area: main;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #000000;
+  background-color: #E8ECEB;
   padding: 20px;
   overflow-y: scroll;
-  color: white;
-  justify-content: center;
-}
-
-.main-title {
-  /* edits the start screen text and background */
-  background-color: black;
-  color: rgba(255,196,37);
-  font-family: 'Monoton', cursive;
 }
 
 body > main h1:first-child {
@@ -80,14 +50,7 @@ nav > a {
   text-decoration: none;
   padding: 10px;
   border-radius: 5px;
-  background-color: #000000;
 }
-
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
 
 nav > a:hover:not(.active) {
   color: white;
@@ -99,10 +62,14 @@ nav > a.active {
   cursor: default;
 }
 
-.navbar-expand-lg {
-  /* adding nav bar color */
-  background-color:#6A3C1A;
+/* body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+
+a {
+  color: #00B7FF;
+} 
 
 .review-user {
   display: flex;
@@ -114,11 +81,8 @@ nav > a.active {
   border-radius: 50%;
   height: 40px;
 }
+*/
 
-
-a {
-  color: #00B7FF;
-}  */
 .login {
   display: flex;
   justify-content: center;
@@ -132,10 +96,4 @@ a {
 
 .container {
     align-items: center;
-    background: #6A3C1A;
-}
-
-#placeholder-svg {
-  height: 600px;
-  width: 600px;
 }
