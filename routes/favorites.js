@@ -10,6 +10,6 @@ const ensureLoggedIn = require('../config/ensureLoggedIn');
 router.post('/:id', ensureLoggedIn, favoritesCtrl.create);
 
 // DELETE /favorites/:id
-// router.delete('/', ensureLoggedIn, favoritesCtrl.delete);
+router.delete('/:id/delete', ensureLoggedIn, favoritesCtrl.delete);
 
 module.exports = router;

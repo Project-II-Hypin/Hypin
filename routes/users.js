@@ -6,7 +6,7 @@ const userCtrl = require("../controllers/users");
 // Requires oAuth middleware:
 const ensureLoggedIn = require('../config/ensureLoggedIn');
 
-//GET /users/:id
-router.get("/user", ensureLoggedIn, userCtrl.show);
+//GET /users/show
+router.get("/show", ensureLoggedIn, userCtrl.show);
 
 module.exports = router;

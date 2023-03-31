@@ -1,7 +1,8 @@
 <!-- releases gallery -->
 <%- include("../partials/header") %>
 
-
+<h1 class="fw-light text-center text-lg-start mt-4 mb-0"> <%= artist.name %></h1> <br>
+<% if (artist.profile) { %>
 <div class="accordion" id="profileAccordion">
     <div class="accordion-item">
       <h2 class="accordion-header">
@@ -16,14 +17,30 @@
       </div>
     </div>
 </div>
-    <% if (user) { %>
+<% } else { %>
+<h3>No profile.</h3>
+<% } %>
+<br>
+<% if (user) { %>
+    <% if (!isFavorite) { %>
         <form action="/favorites/<%= artist._id %>" method="POST">
-            <button button-type="submit" id="favorite-btn" >Add to favorites</button>
+            <label>Add to favorites: 
+                <button button-type="submit" id="favorite-btn">✅</button>
+            </label>
+        </form>
+    <% } else { %>
+        <form action="/favorites/<%= artist._id %>/delete?_method=DELETE" method="POST">
+            <label>Remove from favorites: 
+                <button type="submit" id="favorite-btn">❌</button>
+            </label>
         </form>
     <% } %>
+<% } else { %>
+    <p>Sign in to add favorites!</p>
+<% } %>
 <% artist.releases.forEach(function(rel) { %>
-        <!-- top margin -->
-        <hr class="mt-2 mb-5"> 
+    <!-- top margin -->
+    <hr class="mt-2 mb-5"> 
         <!-- tiles for the images.  -->
         <div class="row text-center text-lg-start">
             <h3 class="text center"> <%= rel.title %> (<%= rel.year %>) </h3>

@@ -1,6 +1,7 @@
 
 // Requires models:
 const Artist = require('../models/artist');
+const User = require('../models/user');
 
 // Allows Legacy users to use fetch:
 // const fetch = require('node-fetch');
@@ -12,7 +13,14 @@ const SORT_ORDER = 'year,desc';
 
 async function show(req, res) {
     const artist = await Artist.findById(req.params.id);
-    res.render('artists/show', { title:`${artist.name}`, artist, paramsId: req.params.id })
+    let isFavorite = null;
+    if (req.user) {
+        const user = await User.findById(req.user._id);
+        if (user.favorites.find(favorite => `${favorite.artistId}` === `${req.params.id}`)) {
+            isFavorite = true;
+        }
+    }
+    res.render('artists/show', { title:`${artist.name}`, artist, paramsId: req.params.id, isFavorite });
 }
 
 async function newArtist(req, res, next) { 

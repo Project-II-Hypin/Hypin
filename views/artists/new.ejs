@@ -5,6 +5,8 @@
     <p>Please try again.</p>
 <% } %>
 <% if (artistData) { %>
+    <h3>ARTIST FOUND!</h3>
+    <p>Confirm artist.</p>
     <form action="/artists" method="POST">
         <label> Artist:
             <h5><%= artistData[0] %></h5>
@@ -20,6 +22,8 @@
         <button type="submit">SUBMIT</button>
     </form>
 <% } else { %>
+    <h3>ADD AN ARTIST!</h3>
+    <p>Enter a name into the field.</p>
 <form action="/artists/new" method="POST">
     <label> Artist Name:
         <input name="artistname" type="text">

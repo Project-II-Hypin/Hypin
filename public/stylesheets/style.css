@@ -59,7 +59,7 @@ body > main {
   align-items: center;
   background-color: #000000;
   padding: 20px;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   color: white;
   justify-content: center;
 }
@@ -110,10 +110,7 @@ nav > a.active {
   align-items: center;
 }
 
-.review-user img {
-  border-radius: 50%;
-  height: 40px;
-}
+
 
 
 a {
@@ -135,7 +132,41 @@ a {
     background: #6A3C1A;
 }
 
+#hypin-home {
+  color: rgba(255,196,37);
+  font-family: 'Monoton', cursive;
+}
+
+/* Hypin images: */
+
 #placeholder-svg {
   height: 600px;
   width: 600px;
+}
+
+#hypin-home-icon {
+  height: 2.25rem;
+  width: 2.25rem;
+}
+
+#hypin-home-gif {
+  height: 31.25rem;
+  width: 42.5rem;
+}
+
+/* Review Table: */
+
+.review-user img {
+  border-radius: 50%;
+  height: 2.5rem;
+}
+
+.release-review-table > * {
+  justify-content: center;
+  align-items: center;
+  height: 1rem;
+}
+
+.release-review-table > th, td {
+  padding: 15px;
 }

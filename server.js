@@ -51,7 +51,7 @@ app.use(function (req, res, next) {
 app.use('/', indexRouter);
 app.use('/artists', artistsRouter); 
 app.use('/releases', releasesRouter);
-app.use('/', usersRouter);
+app.use('/users', usersRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/favorites', favoritesRouter);
 
