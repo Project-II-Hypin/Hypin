@@ -1,7 +1,7 @@
 <%- include("../partials/header") %>
 
 <img class="img-fluid img-thumbnail" src= "<%= user.avatar %>" alt=""> 
-<h1 class="fw-light text-center text-lg-start mt-4 mb-0"> <%= user.name %></h1> <br>
+<h1 class="main-title"> <%= user.name %></h1> <br>
 <!-- ADD CONDITIONAL FOR EMPLTY PROFILE -->
 <% if (user.favorites.length) { %>
     <div class="container">
