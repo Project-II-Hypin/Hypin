@@ -1,0 +1,26 @@
+<%- include("../partials/header") %>
+
+<img class="img-fluid img-thumbnail" src= "<%= user.avatar %>" alt=""> 
+<h1 class="main-title"> <%= user.name %></h1> <br>
+<!-- ADD CONDITIONAL FOR EMPLTY PROFILE -->
+<% if (user.favorites.length) { %>
+    <div class="container">
+    <% user.favorites.forEach( favorite => { %>
+            <!-- top margin -->
+            <hr class="mt-2 mb-5"> 
+            <!-- tiles for the images.  -->
+            <div class="row text-center text-lg-start">
+                <div class="col-lg-12 col-md-4 col-6">
+                    <a href="<%= `../artists/${favorite.artistId}/`%>" class="text-center d-block mb-4 h-100">
+                        <img class="img-fluid img-thumbnail" src= "<%= favorite.image %>" alt=""> 
+                        <h3 class="text center"> <%= favorite.artistName %> </h3>
+                    </a>
+                </div>
+            </div>
+    <% }); %>
+    </div>
+<% } else { %>
+<h3>You have no favorites yet.</h3>
+<% } %>
+
+<%- include("../partials/footer") %>

@@ -1,6 +1,7 @@
 
 // Requires models:
 const Artist = require('../models/artist');
+const User = require('../models/user');
 
 // Allows Legacy users to use fetch:
 // const fetch = require('node-fetch');
@@ -12,7 +13,14 @@ const SORT_ORDER = 'year,desc';
 
 async function show(req, res) {
     const artist = await Artist.findById(req.params.id);
-    res.render('artists/show', { title:`${artist.name}`, artist, paramsId: req.params.id })
+    let isFavorite = null;
+    if (req.user) {
+        const user = await User.findById(req.user._id);
+        if (user.favorites.find(favorite => `${favorite.artistId}` === `${req.params.id}`)) {
+            isFavorite = true;
+        }
+    }
+    res.render('artists/show', { title:`${artist.name}`, artist, paramsId: req.params.id, isFavorite });
 }
 
 async function newArtist(req, res, next) { 
@@ -95,7 +103,7 @@ async function create(req, res, next) {
                 }
                 async function releasesHelper(url, id, order) {
                     const releasesArr = [];
-                    await fetch(`${url}/artists/${id}/releases?${order}?key=${process.env.CONSUMER_KEY}&secret=${process.env.CONSUMER_SECRET}}`)
+                    await fetch(`${url}/artists/${id}/releases?${order}?key=${process.env.CONSUMER_KEY}&secret=${process.env.CONSUMER_SECRET}`)
                         .then(releasesData => releasesData .json())
                         .then(async releasesData  => {
                             for (const releaseData of releasesData.releases) {
@@ -132,22 +140,6 @@ async function create(req, res, next) {
     }
 }
 
-function addToFavorites(req, res) {
-	Artist.findOne({ id: req.body.id })
-		.then((artist) => {
-			if (artist) {
-                console.log(req.user._id)
-				artist.favoritedBy.push(req.user._id);
-				artist.save().then(() => {
-					res.redirect(`/artists/${req.body.id}`);
-				});
-			}
-		})
-		.catch((err) => {
-			console.log(err);
-		});
-}
-
 module.exports = {
     new: newArtist,
     find: findArtist,
@@ -155,5 +147,4 @@ module.exports = {
     query: artistQuery,
     create,
     show,
-    addToFavorites
 };

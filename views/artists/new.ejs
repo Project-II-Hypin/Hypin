@@ -1,10 +1,12 @@
 <%- include('../partials/header') %>
 
 <% if (invalidArtist) { %>
-    <h3>Invalid Artist!</h3>
-    <p>Please try again.</p>
+    <h1 class="main-title">Invalid Artist!</h1>
+    <h4>Please try again.</h4><br><br>
 <% } %>
 <% if (artistData) { %>
+    <h3 class="main-title">ARTIST FOUND!</h3>
+    <h4>Confirm artist.</h4><br><br>
     <form action="/artists" method="POST">
         <label> Artist:
             <h5><%= artistData[0] %></h5>
@@ -20,6 +22,8 @@
         <button type="submit">SUBMIT</button>
     </form>
 <% } else { %>
+    <h1 class="main-title">ADD AN ARTIST!</h1>
+    <h4>Enter a name into the field.</h4><br><br>
 <form action="/artists/new" method="POST">
     <label> Artist Name:
         <input name="artistname" type="text">

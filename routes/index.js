@@ -9,7 +9,7 @@ const fetch = require('node-fetch');
 router.get('/', function(req, res, next) {
    //loading the TITLE here needs to be changed.
  //upodated index/hypin.app
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Hypin' });
 });
 
 // Google OAuth login route

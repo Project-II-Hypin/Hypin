@@ -1,23 +1,56 @@
 <!-- releases gallery -->
 <%- include("../partials/header") %>
 
-
-<h1 class="fw-light text-center text-lg-start mt-4 mb-0"> <%= artist.name %></h1> <br>
-<!-- ADD CONDITIONAL FOR EMPLTY PROFILE -->
-<p class="text-center"> <%= artist.profile %> </p>
-<div class="container">
-    <% if (user) { %>
-        <button id="favorite-btn" method="POST" action ="/artists/<%= artist._id %>">Add to favorites</button>
-        <% } %>
+<h1 class="main-title"> <%= artist.name %></h1>
+<% if (artist.profile) { %>
+<div class="accordion" id="profileAccordion">
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#profileCollapse" aria-expanded="false" aria-controls="profileCollapse" style="transition: height 1.5s ease; background:#6A3C1A;color: white">
+          Show Profile
+        </button>
+      </h2>
+      <div id="profileCollapse" class="accordion-collapse collapse" aria-labelledby="profileHeading" data-bs-parent="#profileAccordion">
+        <div class="accordion-body" style="color:black">
+          <%= artist.profile %>
+        </div>
+      </div>
+    </div>
+</div>
+<% } else { %>
+<h3>No profile.</h3>
+<% } %>
+<br>
+<% if (user) { %>
+    <% if (!isFavorite) { %>
+        <form action="/favorites/<%= artist._id %>" method="POST">
+            <label>Add to favorites: 
+                <button button-type="submit" id="favorite-btn">✅</button>
+            </label>
+        </form>
+    <% } else { %>
+        <form action="/favorites/<%= artist._id %>/delete?_method=DELETE" method="POST">
+            <label>Remove from favorites: 
+                <button type="submit" id="favorite-btn">❌</button>
+            </label>
+        </form>
+    <% } %>
+<% } else { %>
+    <p>Sign in to add favorites!</p>
+<% } %>
 <% artist.releases.forEach(function(rel) { %>
-        <!-- top margin -->
-        <hr class="mt-2 mb-5"> 
+    <!-- top margin -->
+    <hr class="mt-2 mb-5"> 
         <!-- tiles for the images.  -->
         <div class="row text-center text-lg-start">
-            <h3 class="text center"> <%= rel.title %> (<%= rel.year %>) </h3>
+            <h3 class="text-center"> <%= rel.title %> (<%= rel.year %>) </h3>
             <div class="col-lg-12 col-md-4 col-6">
                 <a href="<%= `../releases/${rel._id}:${paramsId}/show` %>" class="text-center d-block mb-4 h-100">
-                    <img class="img-fluid img-thumbnail" src= "<%= rel.thumb %>" alt="">
+                    <% if (rel.thumb) { %>
+                        <img class="img-fluid img-thumbnail" src= "<%= rel.thumb %>" alt="">
+                    <% } else { %>
+                        <img id="placeholder-svg" class="img-fluid img-thumbnail" src= "/images/placeholder.svg" alt="">
+                    <% } %>
                 </a>
             </div>
         </div>

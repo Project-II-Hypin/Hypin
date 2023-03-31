@@ -1,11 +1,15 @@
-* {
+
+
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+
+
+ * {
   box-sizing: border-box;
   font-family: Helvetica;
-  color: #424748;
 }
 
-/* body {
-  margin: 0;
+ body {
+  margin: -3.125rem;
   height: 100vh;
   display: grid;
   grid-template-rows: 50px 1fr;
@@ -16,27 +20,55 @@
 
 body > nav {
   grid-area: nav;
-  background-color: #B8C0C2;
+  background-color: #72bbce;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   padding: 0 20px 0 30px;
-} */
+} 
 
-nav /*> img*/ {
-  width: 34px;
+/* sets navigation up to be visible and contained */
+nav {
+  min-width: 100%;
   object-fit: contain;
   margin-right: auto;
+  background: #6A3C1A;
 }
+
+.navbar-nav  {
+  /* adding nav bar color */
+  background-color: #6A3C1A;
+}
+.navbar {
+  /* adding nav bar color */
+  background-color:#6A3C1A;
+}
+.container-fluid {
+  /* adding nav bar color */
+  background-color:#6A3C1A;
+}
+
+
+
+
 
 body > main {
   grid-area: main;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #E8ECEB;
+  background-color: #000000;
   padding: 20px;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
+  color: white;
+  justify-content: center;
+}
+
+.main-title {
+  /* edits the start screen text and background */
+  background-color: black;
+  color: rgba(255,196,37);
+  font-family: 'Monoton', cursive;
 }
 
 body > main h1:first-child {
@@ -48,7 +80,14 @@ nav > a {
   text-decoration: none;
   padding: 10px;
   border-radius: 5px;
+  background-color: #000000;
 }
+
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
 
 nav > a:hover:not(.active) {
   color: white;
@@ -60,15 +99,10 @@ nav > a.active {
   cursor: default;
 }
 
-
-/* body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.navbar-expand-lg {
+  /* adding nav bar color */
+  background-color:#6A3C1A;
 }
-
-a {
-  color: #00B7FF;
-} */
 
 .review-user {
   display: flex;
@@ -76,11 +110,12 @@ a {
   align-items: center;
 }
 
-.review-user img {
-  border-radius: 50%;
-  height: 40px;
-}
 
+
+
+a {
+  color: #00B7FF;
+}  */
 .login {
   display: flex;
   justify-content: center;
@@ -94,4 +129,44 @@ a {
 
 .container {
     align-items: center;
+    background: #6A3C1A;
+}
+
+#hypin-home {
+  color: rgba(255,196,37);
+  font-family: 'Monoton', cursive;
+}
+
+/* Hypin images: */
+
+#placeholder-svg {
+  height: 600px;
+  width: 600px;
+}
+
+#hypin-home-icon {
+  height: 2.25rem;
+  width: 2.25rem;
+}
+
+#hypin-home-gif {
+  height: 31.25rem;
+  width: 42.5rem;
+}
+
+/* Review Table: */
+
+.review-user img {
+  border-radius: 50%;
+  height: 2.5rem;
+}
+
+.release-review-table > * {
+  justify-content: center;
+  align-items: center;
+  height: 1rem;
+}
+
+.release-review-table > th, td {
+  padding: 15px;
 }
